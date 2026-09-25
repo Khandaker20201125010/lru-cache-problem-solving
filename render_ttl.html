@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LRU Cache TTL Expiration Output</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #0b0f19;
+      font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Segoe UI Mono', Consolas, monospace;
+      color: #e2e8f0;
+      padding: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    .terminal-window {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      width: 960px;
+      overflow: hidden;
+    }
+    .terminal-header {
+      background: #1e293b;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #334155;
+    }
+    .window-controls {
+      display: flex;
+      gap: 8px;
+    }
+    .control-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .dot-close { background: #ef4444; }
+    .dot-minimize { background: #eab308; }
+    .dot-maximize { background: #22c55e; }
+    .terminal-title {
+      font-size: 13px;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+    .terminal-body {
+      padding: 24px 28px;
+      font-size: 14.5px;
+      line-height: 1.65;
+    }
+    .command-line {
+      color: #38bdf8;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .prompt {
+      color: #4ade80;
+      font-weight: 600;
+    }
+    .cmd {
+      color: #f8fafc;
+      font-weight: 600;
+    }
+    .section-header {
+      color: #c084fc;
+      font-weight: bold;
+      margin: 10px 0 14px 0;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed #334155;
+      font-size: 16px;
+    }
+    .step {
+      margin-top: 14px;
+    }
+    .step-badge {
+      color: #f1f5f9;
+      font-weight: bold;
+    }
+    .op {
+      color: #38bdf8;
+    }
+    .cache-state {
+      margin-left: 20px;
+      color: #cbd5e1;
+    }
+    .res-active {
+      color: #4ade80;
+      font-weight: bold;
+    }
+    .res-expired {
+      color: #f87171;
+      font-weight: bold;
+    }
+    .waiting-box {
+      margin: 16px 0 16px 20px;
+      color: #facc15;
+      background: rgba(250, 204, 21, 0.1);
+      border-left: 4px solid #facc15;
+      padding: 8px 14px;
+      border-radius: 0 6px 6px 0;
+      font-weight: 500;
+    }
+    .success-footer {
+      margin-top: 24px;
+      color: #4ade80;
+      font-weight: bold;
+      background: rgba(74, 222, 128, 0.1);
+      padding: 10px 14px;
+      border-radius: 6px;
+      border: 1px solid rgba(74, 222, 128, 0.25);
+    }
+  </style>
+</head>
+<body>
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="window-controls">
+        <span class="control-dot dot-close"></span>
+        <span class="control-dot dot-minimize"></span>
+        <span class="control-dot dot-maximize"></span>
+      </div>
+      <div class="terminal-title">pwsh — TTL Expiration Demo (Bonus Feature)</div>
+      <div style="width: 50px;"></div>
+    </div>
+    <div class="terminal-body">
+      <div class="command-line">
+        <span class="prompt">pranto@lru-cache:~$</span>
+        <span class="cmd">npm run demo  # Part 2 (Bonus TTL Feature)</span>
+      </div>
+
+      <div class="section-header">DEMO 2: Bonus Feature — Time-To-Live (TTL) Expiration & Lazy Eviction</div>
+      <div>Creating cache: <span style="color:#facc15; font-weight:600;">ttlCache = Cache(3)</span></div>
+
+      <div class="step">
+        <span class="step-badge">[TTL Step 1]</span> Inserting entries with and without expiration:<br>
+        <span class="cache-state">&bull; <span class="op">cache.put("session_token", "xyz-789", 600)</span> &rarr; TTL set to <strong>600ms</strong></span><br>
+        <span class="cache-state">&bull; <span class="op">cache.put("api_config", "https://api.internal/v1")</span> &rarr; Persistent (No TTL)</span>
+      </div>
+
+      <div class="step">
+        <span class="step-badge">[TTL Step 2]</span> Immediate access before expiration:<br>
+        <span class="cache-state">&bull; cache.get("session_token") &rarr; <span class="res-active">"xyz-789"</span> (Status: Active / Cache Hit)</span><br>
+        <span class="cache-state">&bull; cache.get("api_config") &nbsp;&nbsp;&nbsp;&rarr; <span class="res-active">"https://api.internal/v1"</span> (Status: Active / Cache Hit)</span>
+      </div>
+
+      <div class="waiting-box">
+        ⏳ [TTL Step 3] Waiting 800ms for "session_token" to exceed TTL threshold... (Elapsed &gt; 600ms)
+      </div>
+
+      <div class="step">
+        <span class="step-badge">[TTL Step 4]</span> Accessing entries after expiration:<br>
+        <span class="cache-state">&bull; cache.get("session_token") &rarr; <span class="res-expired">-1</span> (Result: -1 &mdash; Expired &amp; Lazy Pruned in O(1) time!)</span><br>
+        <span class="cache-state">&bull; cache.get("api_config") &nbsp;&nbsp;&nbsp;&rarr; <span class="res-active">"https://api.internal/v1"</span> (Result: Value preserved &mdash; No TTL)</span>
+      </div>
+
+      <div class="success-footer">
+        ✔ TTL expiration verified successfully! Clean lazy-eviction on access ensures constant O(1) runtime.
+      </div>
+    </div>
+  </div>
+</body>
+</html>

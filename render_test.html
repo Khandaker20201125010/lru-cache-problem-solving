@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vitest Test Suite Output</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #0b0f19;
+      font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Segoe UI Mono', Consolas, monospace;
+      color: #e2e8f0;
+      padding: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    .terminal-window {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      width: 960px;
+      overflow: hidden;
+    }
+    .terminal-header {
+      background: #1e293b;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #334155;
+    }
+    .window-controls {
+      display: flex;
+      gap: 8px;
+    }
+    .control-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .dot-close { background: #ef4444; }
+    .dot-minimize { background: #eab308; }
+    .dot-maximize { background: #22c55e; }
+    .terminal-title {
+      font-size: 13px;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+    .terminal-body {
+      padding: 24px 28px;
+      font-size: 14.5px;
+      line-height: 1.65;
+    }
+    .command-line {
+      color: #38bdf8;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .prompt {
+      color: #4ade80;
+      font-weight: 600;
+    }
+    .cmd {
+      color: #f8fafc;
+      font-weight: 600;
+    }
+    .run-badge {
+      display: inline-block;
+      background: #0284c7;
+      color: white;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 13px;
+      margin-bottom: 14px;
+    }
+    .test-file {
+      color: #4ade80;
+      font-weight: bold;
+      margin-bottom: 14px;
+    }
+    .test-item {
+      margin-left: 20px;
+      margin-bottom: 6px;
+      color: #cbd5e1;
+    }
+    .check {
+      color: #4ade80;
+      font-weight: bold;
+      margin-right: 8px;
+    }
+    .duration {
+      color: #64748b;
+      font-size: 12px;
+      margin-left: 6px;
+    }
+    .summary-box {
+      margin-top: 24px;
+      padding-top: 16px;
+      border-top: 1px dashed #334155;
+    }
+    .summary-row {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 6px;
+    }
+    .label {
+      width: 120px;
+      color: #94a3b8;
+    }
+    .val-pass {
+      color: #4ade80;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="window-controls">
+        <span class="control-dot dot-close"></span>
+        <span class="control-dot dot-minimize"></span>
+        <span class="control-dot dot-maximize"></span>
+      </div>
+      <div class="terminal-title">pwsh — Test Suite Execution (Vitest)</div>
+      <div style="width: 50px;"></div>
+    </div>
+    <div class="terminal-body">
+      <div class="command-line">
+        <span class="prompt">pranto@lru-cache:~$</span>
+        <span class="cmd">npm test</span>
+      </div>
+
+      <div><span class="run-badge">RUN</span> <span style="color:#94a3b8;">v5.0.2 C:/projects/lru-cache</span></div>
+
+      <div class="test-file">✓ tests/lru-cache.test.ts (9 tests) <span class="duration">19ms</span></div>
+
+      <div class="test-item"><span class="check">✓</span> LRU Cache - Core Specification Requirements > should execute the prompt's reference example accurately <span class="duration">2ms</span></div>
+      <div class="test-item"><span class="check">✓</span> LRU Cache - Core Specification Requirements > should validate capacity must be a positive integer <span class="duration">1ms</span></div>
+      <div class="test-item"><span class="check">✓</span> LRU Cache - Core Specification Requirements > should return -1 for keys that have never been added <span class="duration">1ms</span></div>
+      <div class="test-item"><span class="check">✓</span> LRU Cache - Core Specification Requirements > should update an existing key's value without increasing cache size or evicting <span class="duration">1ms</span></div>
+      <div class="test-item"><span class="check">✓</span> LRU Cache - Core Specification Requirements > should correctly handle capacity of 1 <span class="duration">1ms</span></div>
+      <div class="test-item"><span class="check">✓</span> LRU Cache - Core Specification Requirements > should track LRU order accurately <span class="duration">1ms</span></div>
+      <div class="test-item"><span class="check">✓</span> LRU Cache - Core Specification Requirements > should support delete, has, and clear operations <span class="duration">1ms</span></div>
+      <div class="test-item"><span class="check">✓</span> LRU Cache - Bonus TTL / Expiration Support > should expire items after TTL elapsed <span class="duration">4ms</span></div>
+      <div class="test-item"><span class="check">✓</span> LRU Cache - Bonus TTL / Expiration Support > should actively clean expired items with cleanExpired() <span class="duration">2ms</span></div>
+
+      <div class="summary-box">
+        <div class="summary-row"><span class="label">Test Files</span><span class="val-pass">1 passed</span> (1)</div>
+        <div class="summary-row"><span class="label">Tests</span><span class="val-pass">9 passed</span> (9)</div>
+        <div class="summary-row"><span class="label">Duration</span><span>742ms</span></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

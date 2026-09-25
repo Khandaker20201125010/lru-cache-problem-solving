@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LRU Cache Program Output</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      background-color: #0b0f19;
+      font-family: 'Cascadia Code', 'Fira Code', 'JetBrains Mono', 'Segoe UI Mono', Consolas, monospace;
+      color: #e2e8f0;
+      padding: 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    .terminal-window {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
+      width: 960px;
+      overflow: hidden;
+    }
+    .terminal-header {
+      background: #1e293b;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #334155;
+    }
+    .window-controls {
+      display: flex;
+      gap: 8px;
+    }
+    .control-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .dot-close { background: #ef4444; }
+    .dot-minimize { background: #eab308; }
+    .dot-maximize { background: #22c55e; }
+    .terminal-title {
+      font-size: 13px;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+    .terminal-body {
+      padding: 24px 28px;
+      font-size: 14.5px;
+      line-height: 1.65;
+    }
+    .command-line {
+      color: #38bdf8;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .prompt {
+      color: #4ade80;
+      font-weight: 600;
+    }
+    .cmd {
+      color: #f8fafc;
+      font-weight: 600;
+    }
+    .banner {
+      color: #4ade80;
+      font-weight: 700;
+      margin: 12px 0 20px 0;
+      white-space: pre;
+    }
+    .section-header {
+      color: #38bdf8;
+      font-weight: bold;
+      margin: 18px 0 10px 0;
+      border-top: 1px dashed #334155;
+      padding-top: 14px;
+    }
+    .step {
+      margin-top: 14px;
+    }
+    .step-badge {
+      color: #f1f5f9;
+      font-weight: bold;
+    }
+    .op {
+      color: #38bdf8;
+      font-family: inherit;
+    }
+    .cache-state {
+      margin-left: 20px;
+      color: #cbd5e1;
+    }
+    .res-val {
+      font-weight: bold;
+    }
+    .res-10 { color: #4ade80; }
+    .res-30 { color: #4ade80; }
+    .res-evicted { color: #f87171; font-weight: bold; }
+    .eviction-alert {
+      color: #f87171;
+      font-weight: bold;
+      margin-left: 20px;
+      background: rgba(239, 68, 68, 0.12);
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .tag-mru {
+      color: #4ade80;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .tag-lru {
+      color: #facc15;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .tag-both {
+      color: #c084fc;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    .success-footer {
+      margin-top: 24px;
+      color: #4ade80;
+      font-weight: bold;
+      background: rgba(74, 222, 128, 0.1);
+      padding: 10px 14px;
+      border-radius: 6px;
+      border: 1px solid rgba(74, 222, 128, 0.25);
+    }
+  </style>
+</head>
+<body>
+  <div class="terminal-window">
+    <div class="terminal-header">
+      <div class="window-controls">
+        <span class="control-dot dot-close"></span>
+        <span class="control-dot dot-minimize"></span>
+        <span class="control-dot dot-maximize"></span>
+      </div>
+      <div class="terminal-title">pwsh — LRU Cache Verification (Task 2)</div>
+      <div style="width: 50px;"></div>
+    </div>
+    <div class="terminal-body">
+      <div class="command-line">
+        <span class="prompt">pranto@lru-cache:~$</span>
+        <span class="cmd">npm run demo</span>
+      </div>
+
+      <div class="banner">
+╔══════════════════════════════════════════════════════════════════════╗
+║        LEAST RECENTLY USED (LRU) CACHE - VERIFICATION RUNNER         ║
+║        O(1) Hash Map + Doubly Linked List + Bonus TTL Support        ║
+╚══════════════════════════════════════════════════════════════════════╝</div>
+
+      <div class="section-header">DEMO 1: Standard LRU Cache Operations (Capacity: 2)</div>
+      <div>Creating cache: <span style="color:#facc15; font-weight:600;">cache = Cache(2)</span></div>
+
+      <div class="step">
+        <span class="step-badge">[Step 1]</span> Operation: <span class="op">cache.put("A", 10)</span><br>
+        <span class="cache-state">Current Cache (MRU &rarr; LRU): [ <strong>A</strong> <span class="tag-both">(MRU & LRU)</span> ]</span>
+      </div>
+
+      <div class="step">
+        <span class="step-badge">[Step 2]</span> Operation: <span class="op">cache.put("B", 20)</span><br>
+        <span class="cache-state">Current Cache (MRU &rarr; LRU): [ <strong>B</strong> <span class="tag-mru">(MRU)</span> &nbsp;&rarr;&nbsp; <strong>A</strong> <span class="tag-lru">(LRU)</span> ]</span>
+      </div>
+
+      <div class="step">
+        <span class="step-badge">[Step 3]</span> Operation: <span class="op">cache.get("A")</span><br>
+        <span class="cache-state">Result: <span class="res-val res-10">10</span> (Expected: 10)<br></span>
+        <span class="cache-state">Key "A" accessed &rarr; promoted to MRU position.<br></span>
+        <span class="cache-state">Current Cache (MRU &rarr; LRU): [ <strong>A</strong> <span class="tag-mru">(MRU)</span> &nbsp;&rarr;&nbsp; <strong>B</strong> <span class="tag-lru">(LRU)</span> ]</span>
+      </div>
+
+      <div class="step">
+        <span class="step-badge">[Step 4]</span> Operation: <span class="op">cache.put("C", 30)</span><br>
+        <span class="eviction-alert">[EVICTION TRIGGERED] Capacity (2) exceeded! Evicting LRU entry: "B"</span><br>
+        <span class="cache-state">Current Cache (MRU &rarr; LRU): [ <strong>C</strong> <span class="tag-mru">(MRU)</span> &nbsp;&rarr;&nbsp; <strong>A</strong> <span class="tag-lru">(LRU)</span> ]</span>
+      </div>
+
+      <div class="step">
+        <span class="step-badge">[Step 5]</span> Operation: <span class="op">cache.get("B")</span><br>
+        <span class="cache-state">Result: <span class="res-evicted">-1</span> (Expected: -1 because "B" was evicted)<br></span>
+        <span class="cache-state">Current Cache (MRU &rarr; LRU): [ <strong>C</strong> <span class="tag-mru">(MRU)</span> &nbsp;&rarr;&nbsp; <strong>A</strong> <span class="tag-lru">(LRU)</span> ]</span>
+      </div>
+
+      <div class="step">
+        <span class="step-badge">[Step 6]</span> Operation: <span class="op">cache.get("C")</span><br>
+        <span class="cache-state">Result: <span class="res-val res-30">30</span> (Expected: 30)<br></span>
+        <span class="cache-state">Current Cache (MRU &rarr; LRU): [ <strong>C</strong> <span class="tag-mru">(MRU)</span> &nbsp;&rarr;&nbsp; <strong>A</strong> <span class="tag-lru">(LRU)</span> ]</span>
+      </div>
+
+      <div class="step">
+        <span class="step-badge">[Step 7]</span> Operation: <span class="op">cache.get("A")</span><br>
+        <span class="cache-state">Result: <span class="res-val res-10">10</span> (Expected: 10)<br></span>
+        <span class="cache-state">Current Cache (MRU &rarr; LRU): [ <strong>A</strong> <span class="tag-mru">(MRU)</span> &nbsp;&rarr;&nbsp; <strong>C</strong> <span class="tag-lru">(LRU)</span> ]</span>
+      </div>
+
+      <div class="success-footer">
+        ✔ Standard LRU flow completed flawlessly! Matches exact problem prompt.
+      </div>
+    </div>
+  </div>
+</body>
+</html>
