@@ -1,0 +1,5 @@
+```text
+User: Build a custom LRU Cache in TypeScript without external LRU libraries using HashMap + Doubly LinkedList.
+AI: Provided TypeScript code using Map and custom Node classes with dummy head/tail pointers.
+User: Add tests and runnable demo script.
+AI: Created Jest unit test suite and demo execution script printing real output.
